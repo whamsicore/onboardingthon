@@ -9,7 +9,9 @@ var parser = function (req, res) {
   // console.log('@parse_carters req.body = ', req.body);
   var $ = null;
   var html = req.body; 
-  
+  console.log('html = ', html);
+  console.log('-------------------------------------------');
+
   jsdom.env(
     html,
     function (err, window) {
@@ -40,20 +42,22 @@ var parser = function (req, res) {
       var rows = $('img[height=75]').closest('tr'); 
 
       rows.get().forEach(function(item){
-          var image_url = $(item).find('img').eq(0).attr('src');
-          var attr_cont = $(item).find('td'); 
-          var attr_span = attr_cont.find('span');
-          
-          var attr_obj = {
-              image_url: image_url, 
-              title: attr_span.eq(0)[0].innerHTML, 
-              style: attr_span.eq(1)[0].innerHTML.split(': ')[1], 
-              UPC: attr_span.eq(2)[0].innerHTML.split(': ')[1], 
-              size: attr_span.eq(3)[0].innerHTML.split(': ')[1], 
-              color: attr_span.eq(4)[0].innerHTML.split(': ')[1], 
-              price: attr_span.eq(5)[0].innerHTML
-          }
-          products.push(attr_obj);
+        var image_url = $(item).find('img').eq(0).attr('src');
+        var attr_cont = $(item).find('td'); 
+        var attr_span = attr_cont.find('span');
+        console.log('image_url = ', image_url);
+        console.log('title = ', attr_span.eq(0)[0].innerHTML);
+        
+        var attr_obj = {
+            image_url: image_url, 
+            title: attr_span.eq(0)[0].innerHTML, 
+            style: attr_span.eq(1)[0].innerHTML.split(': ')[1], 
+            UPC: attr_span.eq(2)[0].innerHTML.split(': ')[1], 
+            size: attr_span.eq(3)[0].innerHTML.split(': ')[1], 
+            color: attr_span.eq(4)[0].innerHTML.split(': ')[1], 
+            price: attr_span.eq(5)[0].innerHTML
+        }
+        products.push(attr_obj);
       })
 
       // console.log('order_number = ', order_number);
