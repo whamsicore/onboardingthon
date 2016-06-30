@@ -5,7 +5,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var app = express();
-var parser = require("./parser.js");
+// custom
+var handler = require('./parse_request_handler').handler;
 // var parse_carters = 
 
 ////////////
@@ -21,7 +22,7 @@ app.use(bodyParser.text({
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
-app.post('/parse_carters', parser.parser);
+app.post('/parse/:franchise', handler);
 
 ////////////
 // SERVER //
