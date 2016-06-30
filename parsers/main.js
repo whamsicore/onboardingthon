@@ -1,4 +1,7 @@
 var exports = module.exports; 
+var Entities = require('html-entities').AllHtmlEntities;
+entities = new Entities();
+ 
 
 exports.carters = function($) {
   /////////////////////
@@ -33,7 +36,7 @@ exports.carters = function($) {
     // console.log('=========================================');
     var attr_obj = {
       image_url: image_url, 
-      title: attr_span.eq(0)[0].innerHTML, 
+      title: entities.decode(attr_span.eq(0)[0].innerHTML), 
       style: attr_span.eq(1)[0].innerHTML.split(': ')[1], 
       UPC: attr_span.eq(2)[0].innerHTML.split(': ')[1], 
       size: attr_span.eq(3)[0].innerHTML.split(': ')[1], 
