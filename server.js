@@ -22,5 +22,5 @@ app.post('/parse_carters', parser.parser);
 ////////////
 // SERVER //
 ////////////
-app.listen(4000);
+app.listen(process.env.PORT || 4000);
 console.log('Welcome to Onboardingthon!!!');
