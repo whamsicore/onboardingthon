@@ -12,7 +12,11 @@ var parser = require("./parser.js");
 // ROUTES //
 ////////////
 
-app.use(bodyParser.text({type: '*/*'}));
+app.use(bodyParser.text({
+  type: '*/*', 
+  limit: '15mb'
+}));
+// app.use(bodyParser({limit: '50mb'}));
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
