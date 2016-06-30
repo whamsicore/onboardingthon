@@ -51,10 +51,10 @@ var parser = function (req, res) {
       // console.log('order_number = ', order_number);
       // console.log('products = ', products);
       var res_obj = {
-        order_number: order_number,
-        products: products
+        order_id: order_number,
+        linc_care_orderitems: products
       }
-      
+
       res.send(res_obj);
   }); // jsdom.env
 
