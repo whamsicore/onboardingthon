@@ -1,6 +1,6 @@
 var exports = module.exports;
-// Load Jquery
 
+// Load Jquery
 var jquery = require('jquery');
 var jsdom = require('jsdom');
 
@@ -14,9 +14,17 @@ var parser = function (req, res) {
     html,
     function (err, window) {
       $ = require('jquery')(window);
-      /////////////
+
+      /////////////////////
+      // TRACKING NUMBER //
+      /////////////////////
+      try{
+        var tracking_number = $("span:contains(tracking number)").closest('table').closest('tr').next().find('span a').html();
+      }catch(err){}
+      
+      /////////////////
       // ORDERNUMBER //
-      /////////////
+      /////////////////
       try{
           var order_number = $('body').text().match(/order number is ([^\.\s]+)/)[1];    
       }catch(err){}
@@ -55,11 +63,12 @@ var parser = function (req, res) {
         linc_care_orderitems: products
       }
 
+      if(tracking_number) {
+        res_obj.tracking_number = tracking_number;
+      }
+
       res.send(res_obj);
   }); // jsdom.env
-
-  
-  
 } // parser
 
 exports.parser = parser;
