@@ -9,13 +9,14 @@ var parser = function (req, res) {
   // console.log('@parse_carters req.body = ', req.body);
   var $ = null;
   var html = req.body; 
-  console.log('html = ', html);
-  console.log('-------------------------------------------');
 
   jsdom.env(
     html,
     function (err, window) {
       $ = require('jquery')(window);
+      // console.log('testing body string = ', $('body').text().split());
+      // console.log('-------------------------------------------');
+      // console.log('-------------------------------------------');
 
       /////////////////////
       // TRACKING NUMBER //
@@ -45,9 +46,10 @@ var parser = function (req, res) {
         var image_url = $(item).find('img').eq(0).attr('src');
         var attr_cont = $(item).find('td'); 
         var attr_span = attr_cont.find('span');
-        console.log('image_url = ', image_url);
-        console.log('title = ', attr_span.eq(0)[0].innerHTML);
-        
+        // console.log('image_url = ', image_url);
+        // console.log('title = ', attr_span.eq(0)[0].innerHTML);
+        // console.log('=========================================');
+        // console.log('=========================================');
         var attr_obj = {
             image_url: image_url, 
             title: attr_span.eq(0)[0].innerHTML, 
